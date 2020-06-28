@@ -26,6 +26,7 @@ import time
 import numpy as np
 import random
 import datetime
+import six
 from collections import deque
 from paddle.fluid import profiler
 
@@ -180,7 +181,7 @@ def main():
         exec_strategy=exec_strategy)
 
     if FLAGS.eval:
-        compiled_eval_prog = fluid.compiler.CompiledProgram(eval_prog)
+        compiled_eval_prog = fluid.CompiledProgram(eval_prog)
 
     fuse_bn = getattr(model.backbone, 'norm_type', None) == 'affine_channel'
 
@@ -224,6 +225,7 @@ def main():
 
     # use VisualDL to log data
     if FLAGS.use_vdl:
+        assert six.PY3, "VisualDL requires Python >= 3.5"
         from visualdl import LogWriter
         vdl_writer = LogWriter(FLAGS.vdl_log_dir)
         vdl_loss_step = 0
