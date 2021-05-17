@@ -1,160 +1,318 @@
-English | [简体中文](README.md)
+English | [简体中文](README_cn.md)
 
-Documentation:[https://paddledetection.readthedocs.io](https://paddledetection.readthedocs.io)
+### PaddleDetection 2.0 is ready! Dygraph mode is set by default and static graph code base is [here](static)
 
-# PaddleDetection
+### Highly effective PPYOLO v2 and ultra lightweight PPYOLO tiny are released! [link](configs/ppyolo/README.md)
 
-PaddleDetection is an end-to-end object detection development kit based on PaddlePaddle, which
-aims to help developers in the whole development of training models, optimizing performance and
-inference speed, and deploying models. PaddleDetection provides varied object detection architectures
-in modular design, and wealthy data augmentation methods, network components, loss functions, etc.
-PaddleDetection supported practical projects such as industrial quality inspection, remote sensing
-image object detection, and automatic inspection with its practical features such as model compression
-and multi-platform deployment.
+### SOTA Anchor Free model -- PAFNet is released! [link](configs/ttfnet/README.md)
+# Recent Activity
 
-**Now all models in PaddleDetection require PaddlePaddle version 1.7 or higher, or suitable develop version.**
+A series of live lectures on detailed explanation of industrial-level object detection technology is about to be launched，to see how powerful PP-YOLOv2 surpasses YOLOv5.
 
-<div align="center">
-  <img src="docs/images/000000570688.jpg" />
+Welcome to the PPYLOv2 &Tiny Tech Seminar Group
+
+
+<div align="left">
+  <img src="https://z3.ax1x.com/2021/05/11/gUDw0e.png" width='150'/>
 </div>
 
 
-## Introduction
+### Course Schedule
+[Live Link](http://live.bilibili.com/21689802)
+* May 13rd 19:00-20:00
+  -  Topic: Detailed Interpretation of Industrial-level Object Detection Algorithms
+* May 14th 19:00-20:00
+   - Topic: Analysis and Application of 1.3M Ultra-lightweight Object Detection Algorithm 
+* May 21st 20:00-21:00
+   - Topic: The Model Development Exercise of Small Target Detection Under Complex Background
 
-Features:
+### Course Link
 
-- Rich models:
+[0【PaddleDetection2.0 Special】Quick Experience of New Version](https://aistudio.baidu.com/aistudio/projectdetail/1885319)
 
-  PaddleDetection provides rich of models, including 100+ pre-trained models
-such as object detection, instance segmentation, face detection etc. It covers
-the champion models, the practical detection models for cloud and edge device.
+ [1【PaddleDetection2.0 Special】How to Customize Dataset](https://aistudio.baidu.com/aistudio/projectdetail/1917140)
 
-- Production Ready:
+ [2【PaddleDetection2.0 Special】Quick Start PP-YOLOv2](https://aistudio.baidu.com/aistudio/projectdetail/1922155)
 
-  Key operations are implemented in C++ and CUDA, together with PaddlePaddle's
-highly efficient inference engine, enables easy deployment in server environments.
+ [3【PaddleDetection2.0 Special】Quick Start PP-YOLO tiny](https://aistudio.baidu.com/aistudio/projectdetail/1918450)
 
-- Highly Flexible:
+ [4【PaddleDetection2.0 Special】Quick Start S2ANet](https://aistudio.baidu.com/aistudio/projectdetail/1923957)
 
-  Components are designed to be modular. Model architectures, as well as data
-preprocess pipelines, can be easily customized with simple configuration
-changes.
+ [5【PaddleDetection2.0 Special】Fast Implementation of Pedestrian Detection](https://aistudio.baidu.com/aistudio/projectdetail/1918451)
 
-- Performance Optimized:
+ [6【PaddleDetection2.0 Special】Fast Implementation of Face Detection](https://aistudio.baidu.com/aistudio/projectdetail/1918453)
+ 
 
-  With the help of the underlying PaddlePaddle framework, faster training and
-reduced GPU memory footprint is achieved. Notably, YOLOv3 training is
-much faster compared to other frameworks. Another example is Mask-RCNN
-(ResNet50), we managed to fit up to 4 images per GPU (Tesla V100 16GB) during
-multi-GPU training.
 
-Supported Architectures:
+# Introduction
 
-|                     | ResNet | ResNet-vd <sup>[1](#vd)</sup> | ResNeXt-vd | SENet | MobileNet |  HRNet | Res2Net |
-| ------------------- | :----: | ----------------------------: | :--------: | :---: | :-------: |:------:|:-----:  |
-| Faster R-CNN        |   ✓    |                             ✓ |     x      |   ✓   |     ✗     |   ✗    |  ✗      |
-| Faster R-CNN + FPN  |   ✓    |                             ✓ |     ✓      |   ✓   |     ✗     |   ✓    |  ✓      |
-| Mask R-CNN          |   ✓    |                             ✓ |     x      |   ✓   |     ✗     |   ✗    |  ✗      |
-| Mask R-CNN + FPN    |   ✓    |                             ✓ |     ✓      |   ✓   |     ✗     |   ✗    |  ✓      |
-| Cascade Faster-RCNN |   ✓    |                             ✓ |     ✓      |   ✗   |     ✗     |   ✗    |  ✗      |
-| Cascade Mask-RCNN   |   ✓    |                             ✗ |     ✗      |   ✓   |     ✗     |   ✗    |  ✗      |
-| Libra R-CNN         |   ✗    |                             ✓ |     ✗      |   ✗   |     ✗     |   ✗    |  ✗      |
-| RetinaNet           |   ✓    |                             ✗ |     ✗      |   ✗   |     ✗     |   ✗    |  ✗      |
-| YOLOv3              |   ✓    |                             ✗ |     ✗      |   ✗   |     ✓     |   ✗    |  ✗      |
-| SSD                 |   ✗    |                             ✗ |     ✗      |   ✗   |     ✓     |   ✗    |  ✗      |
-| BlazeFace           |   ✗    |                             ✗ |     ✗      |   ✗   |     ✗     |   ✗    |  ✗      |
-| Faceboxes           |   ✗    |                             ✗ |     ✗      |   ✗   |     ✗     |   ✗    |  ✗      |
+PaddleDetection is an end-to-end object detection development kit based on PaddlePaddle, which aims to help developers in the whole development of constructing, training, optimizing and deploying detection models in a faster and better way.
 
-<a name="vd">[1]</a> [ResNet-vd](https://arxiv.org/pdf/1812.01187) models offer much improved accuracy with negligible performance cost.
+PaddleDetection implements varied mainstream object detection algorithms in modular design, and provides wealthy data augmentation methods, network components(such as backbones), loss functions, etc., and integrates abilities of model compression and cross-platform high-performance deployment.
 
-More models:
-
-- EfficientDet
-- FCOS
-- CornerNet-Squeeze
-- YOLOv4
-
-More Backbones:
-
-- DarkNet
-- VGG
-- GCNet
-- CBNet
-
-Advanced Features:
-
-- [x] **Synchronized Batch Norm**
-- [x] **Group Norm**
-- [x] **Modulated Deformable Convolution**
-- [x] **Deformable PSRoI Pooling**
-- [x] **Non-local and GCNet**
-
-**NOTE:** Synchronized batch normalization can only be used on multiple GPU devices, can not be used on CPU devices or single GPU device.
-
-The following is the relationship between COCO mAP and FPS on Tesla V100 of representative models of each architectures and backbones.
+After a long time of industry practice polishing, PaddleDetection has had smooth and excellent user experience, it has been widely used by developers in more than ten industries such as industrial quality inspection, remote sensing image object detection, automatic inspection, new retail, Internet, and scientific research.
 
 <div align="center">
-  <img src="docs/images/map_fps.png" />
+  <img src="static/docs/images/football.gif" width='800'/>
+</div>
+
+### Product news
+
+- 2021.04.14: Release `release/2.0` version. Dygraph mode in PaddleDetection is fully supported. Cover all the algorithm of static graph and update the performance of mainstream detection models. Release [`PP-YOLO v2` and `PP-YOLO tiny`](configs/ppyolo/README.md), enhanced anchor free model [PAFNet](configs/ttfnet/README.md) and [`S2ANet`](configs/dota/README.md) which is aimed at rotation object detection.Please refer to [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection/tree/release/2.0) for details.
+- 2020.02.07: Release `release/2.0-rc` version, Please refer to [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection/tree/release/2.0-rc) for details.
+
+
+### Features
+
+- **Rich Models**
+PaddleDetection provides rich of models, including **100+ pre-trained models** such as **object detection**, **instance segmentation**, **face detection** etc. It covers a variety of **global competition champion** schemes.
+
+- **Highly Flexible:**
+Components are designed to be modular. Model architectures, as well as data preprocess pipelines and optimization strategies, can be easily customized with simple configuration changes.
+
+- **Production Ready:**
+From data augmentation, constructing models, training, compression, depolyment, get through end to end, and complete support for multi-architecture, multi-device deployment for **cloud and edge device**.
+
+- **High Performance:**
+Based on the high performance core of PaddlePaddle, advantages of training speed and memory occupation are obvious. FP16 training and multi-machine training are supported as well.
+
+#### Overview of Kit Structures
+
+<table>
+  <tbody>
+    <tr align="center" valign="bottom">
+      <td>
+        <b>Architectures</b>
+      </td>
+      <td>
+        <b>Backbones</b>
+      </td>
+      <td>
+        <b>Components</b>
+      </td>
+      <td>
+        <b>Data Augmentation</b>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>
+        <ul><li><b>Two-Stage Detection</b></li>
+          <ul>
+            <li>Faster RCNN</li>
+            <li>FPN</li>
+            <li>Cascade-RCNN</li>
+            <li>Libra RCNN</li>
+            <li>Hybrid Task RCNN</li>
+            <li>PSS-Det RCNN</li>
+          </ul>
+        </ul>
+        <ul><li><b>One-Stage Detection</b></li>
+          <ul>
+            <li>RetinaNet</li>
+            <li>YOLOv3</li>
+            <li>YOLOv4</li>  
+            <li>PP-YOLO</li>
+            <li>SSD</li>
+          </ul>
+        </ul>
+        <ul><li><b>Anchor Free</b></li>
+          <ul>
+            <li>CornerNet-Squeeze</li>
+            <li>FCOS</li>  
+            <li>TTFNet</li>
+          </ul>
+        </ul>
+        <ul>
+          <li><b>Instance Segmentation</b></li>
+            <ul>
+             <li>Mask RCNN</li>
+             <li>SOLOv2</li>
+            </ul>
+        </ul>
+        <ul>
+          <li><b>Face-Detction</b></li>
+            <ul>
+             <li>FaceBoxes</li>
+             <li>BlazeFace</li>
+             <li>BlazeFace-NAS</li>
+            </ul>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>ResNet(&vd)</li>
+          <li>ResNeXt(&vd)</li>
+          <li>SENet</li>
+          <li>Res2Net</li>
+          <li>HRNet</li>
+          <li>Hourglass</li>
+          <li>CBNet</li>
+          <li>GCNet</li>
+          <li>DarkNet</li>
+          <li>CSPDarkNet</li>
+          <li>VGG</li>
+          <li>MobileNetv1/v3</li>  
+          <li>GhostNet</li>
+          <li>Efficientnet</li>  
+        </ul>
+      </td>
+      <td>
+        <ul><li><b>Common</b></li>
+          <ul>
+            <li>Sync-BN</li>
+            <li>Group Norm</li>
+            <li>DCNv2</li>
+            <li>Non-local</li>
+          </ul>  
+        </ul>
+        <ul><li><b>FPN</b></li>
+          <ul>
+            <li>BiFPN</li>
+            <li>BFP</li>  
+            <li>HRFPN</li>
+            <li>ACFPN</li>
+          </ul>  
+        </ul>  
+        <ul><li><b>Loss</b></li>
+          <ul>
+            <li>Smooth-L1</li>
+            <li>GIoU/DIoU/CIoU</li>  
+            <li>IoUAware</li>
+          </ul>  
+        </ul>  
+        <ul><li><b>Post-processing</b></li>
+          <ul>
+            <li>SoftNMS</li>
+            <li>MatrixNMS</li>  
+          </ul>  
+        </ul>
+        <ul><li><b>Speed</b></li>
+          <ul>
+            <li>FP16 training</li>
+            <li>Multi-machine training </li>  
+          </ul>  
+        </ul>  
+      </td>
+      <td>
+        <ul>
+          <li>Resize</li>  
+          <li>Flipping</li>  
+          <li>Expand</li>
+          <li>Crop</li>
+          <li>Color Distort</li>  
+          <li>Random Erasing</li>  
+          <li>Mixup </li>
+          <li>Cutmix </li>
+          <li>Grid Mask</li>
+          <li>Auto Augment</li>  
+        </ul>  
+      </td>  
+    </tr>
+
+
+</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Overview of Model Performance
+The relationship between COCO mAP and FPS on Tesla V100 of representative models of each architectures and backbones.
+
+<div align="center">
+  <img src="docs/images/fps_map.png" />
 </div>
 
 **NOTE:**
-- `CBResNet` stands for `Cascade-Faster-RCNN-CBResNet200vd-FPN`, which has highest mAP on COCO as 53.3% in PaddleDetection models
-- `Cascade-Faster-RCNN` stands for `Cascade-Faster-RCNN-ResNet50vd-DCN`, which has been optimized to 20 FPS inference speed when COCO mAP as 47.8%
-- The enhanced `YOLOv3-ResNet50vd-DCN` is 10.6 absolute percentage points higher than paper on COCO mAP, and inference speed is nearly 70% faster than the darknet framework
-- All these models can be get in [Model Zoo](#Model-Zoo)
+
+- `CBResNet stands` for `Cascade-Faster-RCNN-CBResNet200vd-FPN`, which has highest mAP on COCO as 53.3%
+
+- `Cascade-Faster-RCNN` stands for `Cascade-Faster-RCNN-ResNet50vd-DCN`, which has been optimized to 20 FPS inference speed when COCO mAP as 47.8% in PaddleDetection models
+
+- `PP-YOLO` achieves mAP of 45.9% on COCO and 72.9FPS on Tesla V100. Both precision and speed surpass [YOLOv4](https://arxiv.org/abs/2004.10934)
+
+- `PP-YOLO v2` is optimized version of `PP-YOLO` which has mAP of 49.5% and 68.9FPS on Tesla V100
+
+- All these models can be get in [Model Zoo](#ModelZoo)
+
 
 ## Tutorials
 
-
 ### Get Started
 
-- [Installation guide](docs/tutorials/INSTALL.md)
-- [Quick start on small dataset](docs/tutorials/QUICK_STARTED.md)
-- [Train/Evaluation/Inference](docs/tutorials/GETTING_STARTED.md)
-- [FAQ](docs/FAQ.md)
+- [Installation guide](docs/tutorials/INSTALL_en.md)
+- [Quick start on small dataset](docs/tutorials/QUICK_STARTED_en.md)
+- [Prepare dataset](docs/tutorials/PrepareDataSet.md)
+- [Train/Evaluation/Inference/Deploy](docs/tutorials/GETTING_STARTED_en.md)
 
-### Advanced Tutorial
 
-- [Guide to preprocess pipeline and custom dataset](docs/advanced_tutorials/READER.md)
-- [Models technical](docs/advanced_tutorials/MODEL_TECHNICAL.md)
-- [Transfer learning document](docs/advanced_tutorials/TRANSFER_LEARNING.md)
-- [Parameter configuration](docs/advanced_tutorials/config_doc):
-  - [Introduction to the configuration workflow](docs/advanced_tutorials/config_doc/CONFIG.md)
-  - [Parameter configuration for RCNN model](docs/advanced_tutorials/config_doc/RCNN_PARAMS_DOC.md)
-- [IPython Notebook demo](demo/mask_rcnn_demo.ipynb)
-- [Model compression](slim)
-    - [Model compression benchmark](slim)
-    - [Quantization](slim/quantization)
-    - [Model pruning](slim/prune)
-    - [Model distillation](slim/distillation)
-    - [Neural Architecture Search](slim/nas)
-- [Deployment](deploy)
-    - [Export model for inference](docs/advanced_tutorials/deploy/EXPORT_MODEL.md)
-    - [Python inference](deploy/python)
-    - [C++ inference](deploy/cpp)
-    - [Inference benchmark](docs/advanced_tutorials/inference/BENCHMARK_INFER_cn.md)
+### Advanced Tutorials
+
+- Parameter configuration
+  - [Parameter configuration for RCNN model](docs/tutorials/config_annotation/faster_rcnn_r50_fpn_1x_coco_annotation.md)
+  - [Parameter configuration for PP-YOLO model](docs/tutorials/config_annotation/ppyolo_r50vd_dcn_1x_coco_annotation.md)
+
+- Model Compression(Based on [PaddleSlim](https://github.com/PaddlePaddle/PaddleSlim))
+  - [Prune/Quant/Distill](configs/slim)
+
+- Inference and deployment
+  - [Export model for inference](deploy/EXPORT_MODEL.md)
+  - [Python inference](deploy/python)
+  - [C++ inference](deploy/cpp)
+  - [Serving](deploy/serving)
+  - [Inference benchmark](deploy/BENCHMARK_INFER.md)
+
+- Advanced development
+  - [New data augmentations](docs/advanced_tutorials/READER.md)
+  - [New detection algorithms](docs/advanced_tutorials/MODEL_TECHNICAL.md)
+
 
 ## Model Zoo
 
-- Pretrained models are available in the [PaddleDetection model zoo](docs/MODEL_ZOO.md).
-- [Mobile models](configs/mobile/README.md)
-- [Anchor free models](configs/anchor_free/README.md)
-- [Face detection models](docs/featured_model/FACE_DETECTION_en.md)
-- [Pretrained models for pedestrian detection](docs/featured_model/CONTRIB.md)
-- [Pretrained models for vehicle detection](docs/featured_model/CONTRIB.md)
-- [YOLOv3 enhanced model](docs/featured_model/YOLOv3_ENHANCEMENT.md): Compared to MAP of 33.0% in paper, enhanced YOLOv3 reaches the MAP of 43.6%, and inference speed is improved as well
-- [Objects365 2019 Challenge champion model](docs/featured_model/champion_model/CACascadeRCNN.md)
-- [Best single model of Open Images 2019-Object Detction](docs/featured_model/champion_model/OIDV5_BASELINE_MODEL.md)
-- [Practical Server-side detection method](configs/rcnn_enhance/README_en.md): Inference speed on single V100 GPU can reach 20FPS when COCO mAP is 47.8%.
+- Universal object detection
+  - [Model library and baselines](docs/MODEL_ZOO_cn.md)
+  - [PP-YOLO](configs/ppyolo/README.md)
+  - [Enhanced Anchor Free model--TTFNet](configs/ttfnet/README.md)
+  - [Mobile models](static/configs/mobile/README.md)
+  - [676 classes of object detection](static/docs/featured_model/LARGE_SCALE_DET_MODEL.md)
+  - [Two-stage practical PSS-Det](configs/rcnn_enhance/README.md)
+  - [SSLD pretrained models](docs/feature_models/SSLD_PRETRAINED_MODEL_en.md)
+- Universal instance segmentation
+  - [SOLOv2](configs/solov2/README.md)
+- Rotation object detection
+  - [S2ANet](configs/dota/README.md)
+- Vertical field
+  - [Face detection](configs/face_detection/README.md)
+  - [Pedestrian detection](configs/pedestrian/README.md)
+  - [Vehicle detection](configs/vehicle/README.md)
+- Competition Plan
+  - [Objects365 2019 Challenge champion model](static/docs/featured_model/champion_model/CACascadeRCNN.md)
+  - [Best single model of Open Images 2019-Object Detction](static/docs/featured_model/champion_model/OIDV5_BASELINE_MODEL.md)
+
+## Applications
+
+- [Christmas portrait automatic generation tool](static/application/christmas)
+
+## Updates
+
+v2.0 was released at `04/2021`, fully support dygraph version, which add BlazeFace, PSS-Det and plenty backbones, release `PP-YOLOv2`, `PP-YOLO tiny` and `S2ANet`, support model distillation and VisualDL, add inference benchmark, etc. Please refer to [change log](docs/CHANGELOG.md) for details.
 
 
 ## License
+
 PaddleDetection is released under the [Apache 2.0 license](LICENSE).
 
-## Updates
-v0.3.0 was released at `05/2020`, add anchor-free, EfficientDet, YOLOv4, etc. Launched mobile and server-side practical and efficient multiple models. For example, the YOLOv3-MobileNetv3 mobile side model is accelerated 3.5 times, the server side has optimized the two-stage model, and the speed and accuracy have high cost performance. We also refactored predictive deployment functions, and improved ease of use, fix many known bugs, etc.
-Please refer to [版本更新文档](docs/CHANGELOG.md) for details.
 
 ## Contributing
 
 Contributions are highly welcomed and we would really appreciate your feedback!!
+
+## Citation
+
+```
+@misc{ppdet2019,
+title={PaddleDetection, Object detection and instance segmentation toolkit based on PaddlePaddle.},
+author={PaddlePaddle Authors},
+howpublished = {\url{https://github.com/PaddlePaddle/PaddleDetection}},
+year={2019}
+}
+```
